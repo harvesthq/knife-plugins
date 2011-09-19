@@ -37,27 +37,32 @@ module Turnoffthedark
     :long => '--disable',
     :boolean => true,
     :description => "Turn maintenance mode off"
-    
+
+    option :docroot,
+    :long => '--docroot PATH',
+    :description => 'Document Root path',
+    :default => '/var/www'
+
     banner "knife maintenance --enable or --disable"
-    
+
     def run
-      
+
       if config[:enable]
         puts "WARNING: You are now turning off the world. PANIC."
-        ssh_command = "sudo ln -s /somewhere/maintenance.html /somewhere/maintenanceON"    
+        ssh_command = "sudo ln -s #{config[:docroot]}/maintenance.html #{config[:docroot]}/maintenanceON"
       elsif config[:disable]
         puts "OK: Turning us back on"
-        ssh_command = "sudo rm /somewhere/maintenanceON"    
+        ssh_command = "sudo rm #{config[:docroot]}/maintenanceON"
       else
         puts "I don't know what you want to do."
         exit
       end
-        
+
       query = "role:nginx_production_lb"
       knife_ssh = Chef::Knife::Ssh.new()
       knife_ssh.name_args = [query, ssh_command]
       knife_ssh.run
-      
+
     end
   end
 end
