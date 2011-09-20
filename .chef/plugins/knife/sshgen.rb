@@ -46,7 +46,6 @@ module MakeSSHConfigFile
 
     deps do
       require 'chef/search/query'
-      require 'chef/cookbook_version'
       require 'chef/knife/ssh'
     end
 
@@ -54,7 +53,7 @@ module MakeSSHConfigFile
 
       unless config[:print] || config[:write]
         ui.error "You must specify either --print or --write."
-        exit
+        exit 1
       end
 
       nodes = find_all_nodes
