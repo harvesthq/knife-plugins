@@ -10,5 +10,5 @@ Place in directory: $chef_root/.chef/plugins/knife
 
 ### Credits
 
-- Written by [Harvest](http://www.getharvest.com/)
+- Written by [Harvest](http://www.getharvest.com/). Want to work on projects like this? [We’re hiring](http://www.getharvest.com/careers)!
 - Chef by [Opscode](http://www.opscode.com)
